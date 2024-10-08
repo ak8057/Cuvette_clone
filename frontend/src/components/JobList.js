@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import JobDetails from "./JobDetails"; // Import the JobDetails component
+import { TailSpin } from "react-loader-spinner"; // Import loader spinner component
+
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [filterLocation, setFilterLocation] = useState("all");
   const [selectedJob, setSelectedJob] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const res = await axios.get("http://localhost:5000/api/jobs");
-      const modifiedJobs = await Promise.all(
-        res.data.map(async (job) => {
-          const imageRes = await axios.get(
-            "http://localhost:5000/api/unsplash",
-            {
-              params: { query: job.title },
-            }
-          );
-          const imageUrl =
-            imageRes.data.results[0]?.urls?.small || "default-image-url.jpg";
-          return {
-            ...job,
-            jobOffer: getRandomJobOffer(),
-            imageUrl,
-          };
-        })
-      );
-      setJobs(modifiedJobs);
+      try {
+        const res = await axios.get("http://localhost:5000/api/jobs");
+        const modifiedJobs = await Promise.all(
+          res.data.map(async (job) => {
+            const imageRes = await axios.get(
+              "http://localhost:5000/api/unsplash",
+              {
+                params: { query: job.title },
+              }
+            );
+            const imageUrl =
+              imageRes.data.results[0]?.urls?.small || "default-image-url.jpg";
+            return {
+              ...job,
+              jobOffer: getRandomJobOffer(),
+              imageUrl,
+            };
+          })
+        );
+        setJobs(modifiedJobs);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false); // Set loading to false when data is fetched
+      }
     };
 
     fetchJobs();
@@ -85,109 +94,111 @@ const JobList = () => {
             <option value="internship">Internship</option>
             <option value="freelance">Freelance</option>
           </select>
-          {/* <select
-            onChange={(e) => setFilterLocation(e.target.value)}
-            className="p-3 border border-gray-300 rounded-lg shadow-lg bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-300"
-          >
-            <option value="all">All Locations</option>
-            <option value="remote">Remote</option>
-            <option value="on-site">On-Site</option>
-          </select> */}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
-        {filteredJobs.map((job) => (
-          <div
-            key={job._id}
-            className="bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition duration-500 ease-in-out"
-          >
-            <div className="p-6">
-              {/* Job Image */}
-              <img
-                src={job.imageUrl}
-                alt={job.title}
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                {job.title}
-              </h2>
-              <div className="flex justify-between items-center mb-6">
-                <span className="text-sm text-gray-500">{job.jobOffer}</span>
-                <span className="text-sm text-gray-500">{job.location}</span>
-              </div>
-              <div className="space-y-2">
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-indigo-600">
-                    Experience:
-                  </span>{" "}
-                  {job.experience}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-indigo-600">
-                    Openings:
-                  </span>{" "}
-                  {job.openings}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-indigo-600">
-                    Start Date:
-                  </span>{" "}
-                  {job.startDate}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-indigo-600">
-                    Last Date to Apply:
-                  </span>{" "}
-                  {job.lastDateToApply}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-indigo-600">
-                    Number of Applicants:
-                  </span>{" "}
-                  {job.noOfApplicants}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-indigo-600">Skills:</span>{" "}
-                  {job.skills.join(", ")}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-indigo-600">Salary:</span>{" "}
-                  {job.salaryRange?.min
-                    ? `${job.salaryRange.min} - ${job.salaryRange.max}`
-                    : "Not Available"}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <span className="font-semibold text-indigo-600">
-                    Probation Period:
-                  </span>{" "}
-                  {job.probationPeriod}
-                </p>
-              </div>
-              <div className="mt-6 flex justify-between">
-                <button
-                  className="bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 ease-in-out"
-                  onClick={() => handleViewDetails(job._id)}
-                >
-                  {selectedJob && selectedJob._id === job._id
-                    ? "Hide Details"
-                    : "View Details"}
-                </button>
-                <button
-                  className="bg-green-500 text-white p-2 rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out"
-                  onClick={() => handleApplyNow(job._id)}
-                >
-                  Apply Now
-                </button>
-              </div>
+      {/* Add loader while fetching data */}
+      {loading ? (
+        <div className="flex justify-center items-center h-screen">
+          <TailSpin color="#00BFFF" height={80} width={80} />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
+          {filteredJobs.map((job) => (
+            <div
+              key={job._id}
+              className="bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition duration-500 ease-in-out"
+            >
+              <div className="p-6">
+                <img
+                  src={job.imageUrl}
+                  alt={job.title}
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  {job.title}
+                </h2>
+                <div className="flex justify-between items-center mb-6">
+                  <span className="text-sm text-gray-500">{job.jobOffer}</span>
+                  <span className="text-sm text-gray-500">{job.location}</span>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold text-indigo-600">
+                      Experience:
+                    </span>{" "}
+                    {job.experience}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold text-indigo-600">
+                      Openings:
+                    </span>{" "}
+                    {job.openings}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold text-indigo-600">
+                      Start Date:
+                    </span>{" "}
+                    {job.startDate}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold text-indigo-600">
+                      Last Date to Apply:
+                    </span>{" "}
+                    {job.lastDateToApply}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold text-indigo-600">
+                      Number of Applicants:
+                    </span>{" "}
+                    {job.noOfApplicants}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold text-indigo-600">
+                      Skills:
+                    </span>{" "}
+                    {job.skills.join(", ")}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold text-indigo-600">
+                      Salary:
+                    </span>{" "}
+                    {job.salaryRange?.min
+                      ? `${job.salaryRange.min} - ${job.salaryRange.max}`
+                      : "Not Available"}
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold text-indigo-600">
+                      Probation Period:
+                    </span>{" "}
+                    {job.probationPeriod}
+                  </p>
+                </div>
+                <div className="mt-6 flex justify-between">
+                  <button
+                    className="bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 ease-in-out"
+                    onClick={() => handleViewDetails(job._id)}
+                  >
+                    {selectedJob && selectedJob._id === job._id
+                      ? "Hide Details"
+                      : "View Details"}
+                  </button>
+                  <button
+                    className="bg-green-500 text-white p-2 rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out"
+                    onClick={() => handleApplyNow(job._id)}
+                  >
+                    Apply Now
+                  </button>
+                </div>
 
-              {selectedJob && selectedJob._id === job._id && (
-                <JobDetails job={job} /> // Pass selected job details to the JobDetails component
-              )}
+                {selectedJob && selectedJob._id === job._id && (
+                  <JobDetails job={job} />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
