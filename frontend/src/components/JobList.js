@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import JobDetails from "./JobDetails"; // Import the JobDetails component
-
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,15 +11,26 @@ const JobList = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       const res = await axios.get("http://localhost:5000/api/jobs");
-      const modifiedJobs = res.data.map((job) => ({
-        ...job,
-        jobOffer: getRandomJobOffer(),
-        imageUrl: `https://via.placeholder.com/150?text=Job+Image+${Math.floor(
-          Math.random() * 1000
-        )}`,
-      }));
+      const modifiedJobs = await Promise.all(
+        res.data.map(async (job) => {
+          const imageRes = await axios.get(
+            "http://localhost:5000/api/unsplash",
+            {
+              params: { query: job.title },
+            }
+          );
+          const imageUrl =
+            imageRes.data.results[0]?.urls?.small || "default-image-url.jpg";
+          return {
+            ...job,
+            jobOffer: getRandomJobOffer(),
+            imageUrl,
+          };
+        })
+      );
       setJobs(modifiedJobs);
     };
+
     fetchJobs();
   }, []);
 
