@@ -16,12 +16,48 @@ router.get("/", async (req, res) => {
 
 // POST a New Job
 router.post("/", async (req, res) => {
-  const { title, type, location } = req.body;
-  const newJob = new Job({ title, type, location });
+  const {
+    title,
+    jobOffer,
+    location,
+    experience,
+    salaryRange,
+    skills,
+    openings,
+    startDate,
+    lastDateToApply,
+    probationPeriod,
+  } = req.body;
+
+  // Check if all required fields are provided
+  if (!title || !jobOffer || !location) {
+    return res.status(400).json({
+      msg: "Please provide all required fields (title, jobOffer, location)",
+    });
+  }
+
   try {
-    await newJob.save();
-    res.json(newJob);
+    // Create a new job using the data provided
+    const newJob = new Job({
+      title,
+      jobOffer,
+      location,
+      experience,
+      salaryRange,
+      skills,
+      openings,
+      startDate,
+      lastDateToApply,
+      probationPeriod,
+    });
+
+    // Save the new job to the database
+    const savedJob = await newJob.save();
+
+    // Return the saved job as a response
+    res.status(201).json(savedJob);
   } catch (err) {
+    console.error("Error saving job:", err);
     res.status(500).send("Server Error");
   }
 });

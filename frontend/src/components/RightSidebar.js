@@ -17,7 +17,7 @@ const RightSidebar = () => {
   };
 
   return (
-    <div className="min-w-96 h-1/4 bg-white shadow-lg p-6 space-y-6 z-10">
+    <div className="min-w-96 min-h-96 bg-white shadow-lg p-6 space-y-6 z-10">
       <h2 className="text-2xl font-semibold text-gray-800">Filters</h2>
 
       {/* Office Type Filter */}
@@ -92,7 +92,7 @@ const RightSidebar = () => {
       </div>
 
       {/* Clear and Apply Buttons */}
-      <div className="mt-6 flex justify-between">
+      <div className="mt-6 flex justify-between gap-5">
         <button
           onClick={handleClear}
           className="w-full bg-red-500 text-white py-2 rounded-lg shadow-md hover:bg-red-600 transition duration-300 ease-in-out"
