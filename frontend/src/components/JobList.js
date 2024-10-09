@@ -251,8 +251,8 @@ const JobList = () => {
                         <p className="text-sm">
                           <span className="font-semibold">Job Offer:</span>{" "}
                           {job.salaryRange?.min
-                            ? `${job.salaryRange.min} - ${job.salaryRange.max}`
-                            : "Not Available"}
+                            ? `${job.salaryRange.min}LPA - ${job.salaryRange.max}`
+                            : "Not Available"}LPA
                         </p>
                       </div>
                     </div>
@@ -421,7 +421,7 @@ const JobList = () => {
               <div className="mt-2 space-y-2">
                 <input
                   type="range"
-                  min="3"
+                  min="4"
                   max="12"
                   step="1"
                   value={salary}
@@ -429,7 +429,7 @@ const JobList = () => {
                   className="w-full h-2 bg-gray-200 rounded-lg cursor-pointer range-slider"
                 />
                 <div className="flex justify-between">
-                  <span>3 LPA</span>
+                  <span>4 LPA</span>
                   <span>6 LPA</span>
                   <span>8 LPA</span>
                   <span>10 LPA</span>
