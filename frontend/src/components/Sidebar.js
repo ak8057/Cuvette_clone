@@ -2,7 +2,7 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <aside className="w-72 bg-white border-r border-gray-200 h-screen">
+    <aside className="w-72 sticky top-[4.5rem] bg-white border-r border-gray-200 h-screen">
       <nav className="mt-5 px-2">
         <a
           href="#"

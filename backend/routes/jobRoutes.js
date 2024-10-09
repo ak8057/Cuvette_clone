@@ -27,6 +27,7 @@ router.post("/", async (req, res) => {
     startDate,
     lastDateToApply,
     probationPeriod,
+    officeType,
   } = req.body;
 
   // Check if all required fields are provided
@@ -42,13 +43,14 @@ router.post("/", async (req, res) => {
       title,
       jobOffer,
       location,
-      experience,
-      salaryRange,
-      skills,
-      openings,
-      startDate,
-      lastDateToApply,
-      probationPeriod,
+      experience: experience || null, // Optional, so default to null if not provided
+      salaryRange: salaryRange || null, // Optional, so default to null if not provided
+      skills: skills || [], // Default to an empty array if no skills are provided
+      openings: openings || 0, // Default to 0 if not provided
+      startDate: startDate || null, // Optional, so default to null if not provided
+      lastDateToApply: lastDateToApply || null, // Optional, so default to null if not provided
+      probationPeriod: probationPeriod || null, // Optional, so default to null if not provided
+      officeType: officeType || null, // Optional, so default to null if not provided
     });
 
     // Save the new job to the database
@@ -61,5 +63,4 @@ router.post("/", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
 module.exports = router;

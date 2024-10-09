@@ -58,10 +58,10 @@ const RightSidebar = () => {
           className="w-full mt-2 p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
         >
           <option value="">Select experience</option>
-          <option value="0-2">0-2 Years</option>
-          <option value="2-5">2-5 Years</option>
-          <option value="5-10">5-10 Years</option>
-          <option value="10+">10+ Years</option>
+          <option value="Fresher">Fresher</option>
+          <option value="1-3">1-3 Years</option>
+          <option value="3+">3+ Years</option>
+         
         </select>
       </div>
 
