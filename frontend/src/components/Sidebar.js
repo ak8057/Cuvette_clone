@@ -3,14 +3,15 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <aside className="w-72 sticky top-[4.5rem] bg-white border-r border-gray-200 h-screen">
-      <nav className="mt-5 px-2">
+    <aside className="w-72 sticky top-[4.5rem] bg-white border-r border-gray-200 h-screen shadow-md">
+      <nav className="mt-5 px-3">
+        {/* Full-time Jobs */}
         <NavLink
           to="/fulltime-jobs"
           className={({ isActive }) =>
             isActive
-              ? "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-blue-600 bg-gray-100"
-              : "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              ? "group flex items-center px-3 py-3 text-base font-medium rounded-lg text-blue-600 bg-gray-100 transition duration-300 ease-in-out"
+              : "group flex items-center px-3 py-3 text-base font-medium rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition duration-300 ease-in-out"
           }
         >
           <svg
@@ -29,16 +30,17 @@ const Sidebar = () => {
           Fulltime Jobs
         </NavLink>
 
+        {/* Other Jobs */}
         <NavLink
           to="/other-jobs"
           className={({ isActive }) =>
             isActive
-              ? "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-blue-600 bg-gray-100"
-              : "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              ? "group flex items-center px-3 py-3 text-base font-medium rounded-lg text-blue-600 bg-gray-100 transition duration-300 ease-in-out"
+              : "group flex items-center px-3 py-3 text-base font-medium rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition duration-300 ease-in-out"
           }
         >
           <svg
-            className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+            className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-500 transition duration-300 ease-in-out"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -56,16 +58,17 @@ const Sidebar = () => {
           </span>
         </NavLink>
 
+        {/* Applied Jobs */}
         <NavLink
           to="/applied-jobs"
           className={({ isActive }) =>
             isActive
-              ? "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-blue-600 bg-gray-100"
-              : "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              ? "group flex items-center px-3 py-3 text-base font-medium rounded-lg text-blue-600 bg-gray-100 transition duration-300 ease-in-out"
+              : "group flex items-center px-3 py-3 text-base font-medium rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition duration-300 ease-in-out"
           }
         >
           <svg
-            className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+            className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-500 transition duration-300 ease-in-out"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -80,7 +83,7 @@ const Sidebar = () => {
           Applied
         </NavLink>
       </nav>
-    </aside>
+    </aside>  
   );
 };
 

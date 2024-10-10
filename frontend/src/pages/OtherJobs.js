@@ -128,123 +128,123 @@ const OtherJobs = () => {
         </div>
       </div>
 
-      <div className="flex gap-5">
-        <div>
-          {loading ? (
-            <div className="flex ml-[25rem] justify-center items-center h-screen">
-              <TailSpin color="#4F46E5" height={80} width={80} />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1  gap-8">
-              {filteredJobs.map((job) => (
-                <div
-                  key={job._id}
-                  className="bg-white shadow-xl rounded-2xl overflow-hidden transform transition duration-500 ease-in-out border border-gray-100 w-[56rem]"
-                >
-                  <div className="p-6">
-                    <div className="relative mb-6">
-                      <img
-                        src={job.imageUrl}
-                        alt={job.title}
-                        className="w-full h-48 object-cover rounded-xl"
-                      />
-                      <div className="absolute top-4 right-4">
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm font-semibold ${getJobTypeColor(
-                            job.jobOffer
-                          )}`}
-                        >
-                          {job.jobOffer}
-                        </span>
-                      </div>
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 truncate">
-                      {job.title}
-                    </h2>
-                    <div className="flex flex-wrap justify-between items-center mb-6 text-gray-600">
-                      <div className="flex items-center mb-2 mr-4">
-                        <MapPin className="w-5 h-5 mr-2 text-indigo-600" />
-                        <span>{job.location}</span>
-                      </div>
-                      <div className="flex gap-2 items-center mb-2">
-                        <Briefcase className="w-5 h-5 mr-2  text-indigo-600" />
-                        <span className="font-semibold">Experience:</span>
-                        <span>{job.experience}</span>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 mb-6">
-        
-                      <div className="flex items-center">
-                        <Users className="w-5 h-5 mr-3 text-indigo-600 flex-shrink-0" />
-                        <p className="text-sm">
-                          <span className="font-semibold">Office Type:</span>{" "}
-                          {job.officeType}
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <DollarSign className="w-5 h-5 mr-3 text-indigo-600 flex-shrink-0" />
-                        <p className="text-sm">
-                          <span className="font-semibold">Salary Range:</span>{" "}
-                          {job.salaryRange?.min
-                            ? `${job.salaryRange.min}LPA - ${job.salaryRange.max}LPA`
-                            : "Not Available"}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="mb-6">
-                      <h3 className="text-lg font-semibold mb-2 text-gray-800">
-                        Required Skills:
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {job.skills.map((skill, index) => (
+        <div className="flex gap-5">
+          <div>
+            {loading ? (
+              <div className="flex ml-[25rem] justify-center items-center h-screen">
+                <TailSpin color="#4F46E5" height={80} width={80} />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1  gap-8">
+                {filteredJobs.map((job) => (
+                  <div
+                    key={job._id}
+                    className="bg-white shadow-xl rounded-2xl overflow-hidden transform transition duration-500 ease-in-out border border-gray-100 w-[56rem]"
+                  >
+                    <div className="p-6">
+                      <div className="relative mb-6">
+                        <img
+                          src={job.imageUrl}
+                          alt={job.title}
+                          className="w-full h-48 object-cover rounded-xl"
+                        />
+                        <div className="absolute top-4 right-4">
                           <span
-                            key={index}
-                            className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium"
+                            className={`px-3 py-1 rounded-full text-sm font-semibold ${getJobTypeColor(
+                              job.jobOffer
+                            )}`}
                           >
-                            {skill}
+                            {job.jobOffer}
                           </span>
-                        ))}
+                        </div>
                       </div>
-                    </div>
-                    <div className="mt-6 flex justify-between">
-                     
-                      <button
-                        className="bg-green-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-600 transition duration-300 ease-in-out flex items-center"
-                        onClick={() => handleApplyNow(job._id)}
-                      >
-                        <svg
-                          className="w-5 h-5 mr-2"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-                          ></path>
-                        </svg>
-                        Apply Now
-                      </button>
-                    </div>
-
-                    {selectedJob && selectedJob._id === job._id && (
-                      <div className="mt-6 bg-gray-100 p-4 rounded-lg">
-                        <h3 className="text-xl font-semibold mb-2">
-                          Job Details
+                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 truncate">
+                        {job.title}
+                      </h2>
+                      <div className="flex flex-wrap justify-between items-center mb-6 text-gray-600">
+                        <div className="flex items-center mb-2 mr-4">
+                          <MapPin className="w-5 h-5 mr-2 text-indigo-600" />
+                          <span>{job.location}</span>
+                        </div>
+                        <div className="flex gap-2 items-center mb-2">
+                          <Briefcase className="w-5 h-5 mr-2  text-indigo-600" />
+                          <span className="font-semibold">Experience:</span>
+                          <span>{job.experience}</span>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4 mb-6">
+          
+                        <div className="flex items-center">
+                          <Users className="w-5 h-5 mr-3 text-indigo-600 flex-shrink-0" />
+                          <p className="text-sm">
+                            <span className="font-semibold">Office Type:</span>{" "}
+                            {job.officeType}
+                          </p>
+                        </div>
+                        <div className="flex items-center">
+                          <DollarSign className="w-5 h-5 mr-3 text-indigo-600 flex-shrink-0" />
+                          <p className="text-sm">
+                            <span className="font-semibold">Salary Range:</span>{" "}
+                            {job.salaryRange?.min
+                              ? `${(job.salaryRange.min)/10000}LPA - ${(job.salaryRange.max)/10000}LPA`
+                              : "Not Available"}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mb-6">
+                        <h3 className="text-lg font-semibold mb-2 text-gray-800">
+                          Required Skills:
                         </h3>
-                        <p>{job.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {job.skills.map((skill, index) => (
+                            <span
+                              key={index}
+                              className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    )}
+                      <div className="mt-6 flex justify-between">
+                      
+                        <button
+                          className="bg-green-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-600 transition duration-300 ease-in-out flex items-center"
+                          onClick={() => handleApplyNow(job._id)}
+                        >
+                          <svg
+                            className="w-5 h-5 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                            ></path>
+                          </svg>
+                          Apply Now
+                        </button>
+                      </div>
+
+                      {selectedJob && selectedJob._id === job._id && (
+                        <div className="mt-6 bg-gray-100 p-4 rounded-lg">
+                          <h3 className="text-xl font-semibold mb-2">
+                            Job Details
+                          </h3>
+                          <p>{job.description}</p>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
     </div>
   );
 };
