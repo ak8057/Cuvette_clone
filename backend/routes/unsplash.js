@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Route to fetch images from Unsplash
 router.get("/", async (req, res) => {
-  const { query } = req.query; // e.g., frontend, backend, etc.
+  const { query } = req.query; 
   try {
     const response = await axios.get(`https://api.unsplash.com/search/photos`, {
       params: {

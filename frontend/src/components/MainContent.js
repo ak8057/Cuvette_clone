@@ -1,6 +1,6 @@
   import React, { useState } from "react";
   import JobList from "./JobList";
-  import RightSidebar from "./RightSidebar";
+  // import RightSidebar from "./RightSidebar";
 
 
   const MainContent = () => {

@@ -2,8 +2,10 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import MainContent from './components/MainContent';
-import RightSidebar from './components/RightSidebar';
+// import MainContent from './components/MainContent';
+// import RightSidebar from './components/RightSidebar';
+// import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './AppRoutes'; 
 
 
 function App() {
@@ -13,7 +15,8 @@ function App() {
     
       <div className="flex">
         <Sidebar />
-        <MainContent />
+        <AppRoutes />
+
        
       </div>
     </div>

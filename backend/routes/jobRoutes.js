@@ -1,7 +1,7 @@
 // routes/jobRoutes.js
 const express = require("express");
 const Job = require("../models/jobModel"); // Import Job model
-
+const OtherJob =require("../models/OtherJob");
 const router = express.Router();
 
 // GET All Jobs
@@ -63,4 +63,59 @@ router.post("/", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+
+router.get("/other-jobs", async (req, res) => {
+  try {
+    const ojobs = await OtherJob.find();
+    res.json(ojobs);
+  } catch (err) {
+    console.error("Error fetching other jobs:", err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// POST a New Other Job
+router.post("/other-jobs", async (req, res) => {
+  const {
+    title,
+    jobOffer,
+    location,
+    experience,
+    salaryRange,
+    skills,
+    officeType,
+  } = req.body;
+
+  // Check if all required fields are provided
+  if (!title || !jobOffer || !location) {
+    return res.status(400).json({
+      msg: "Please provide all required fields (title, jobOffer, location)",
+    });
+  }
+
+  try {
+    // Create a new job using the data provided
+    const newJob = new OtherJob({
+      title,
+      jobOffer,
+      location,
+      experience: experience || null, // Optional, so default to null if not provided
+      salaryRange: salaryRange || null, // Optional, so default to null if not provided
+      skills: skills || [], // Default to an empty array if no skills are provided
+      officeType: officeType || null, // Optional, so default to null if not provided
+    });
+
+    // Save the new job to the database
+    const savedJob = await newJob.save();
+
+    // Return the saved job as a response
+    res.status(201).json(savedJob);
+  } catch (err) {
+    console.error("Error saving other job:", err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
 module.exports = router;

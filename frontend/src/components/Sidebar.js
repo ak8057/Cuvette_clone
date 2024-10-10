@@ -1,12 +1,17 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <aside className="w-72 sticky top-[4.5rem] bg-white border-r border-gray-200 h-screen">
       <nav className="mt-5 px-2">
-        <a
-          href="#"
-          className="group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-blue-600 bg-gray-100"
+        <NavLink
+          to="/fulltime-jobs"
+          className={({ isActive }) =>
+            isActive
+              ? "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-blue-600 bg-gray-100"
+              : "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+          }
         >
           <svg
             className="mr-4 h-6 w-6 text-blue-600"
@@ -22,10 +27,15 @@ const Sidebar = () => {
             />
           </svg>
           Fulltime Jobs
-        </a>
-        <a
-          href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+        </NavLink>
+
+        <NavLink
+          to="/other-jobs"
+          className={({ isActive }) =>
+            isActive
+              ? "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-blue-600 bg-gray-100"
+              : "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+          }
         >
           <svg
             className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-500"
@@ -44,10 +54,15 @@ const Sidebar = () => {
           <span className="ml-auto inline-block py-0.5 px-2 text-xs font-medium rounded-full bg-green-100 text-green-800">
             New
           </span>
-        </a>
-        <a
-          href="#"
-          className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+        </NavLink>
+
+        <NavLink
+          to="/applied-jobs"
+          className={({ isActive }) =>
+            isActive
+              ? "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-blue-600 bg-gray-100"
+              : "group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+          }
         >
           <svg
             className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-500"
@@ -63,7 +78,7 @@ const Sidebar = () => {
             />
           </svg>
           Applied
-        </a>
+        </NavLink>
       </nav>
     </aside>
   );

@@ -22,12 +22,15 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error(err));
-
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1); // Exit process if connection fails
+  });
 
 //!apis
 app.use("/api/unsplash", unsplashRoute);
 app.use("/api/jobs",  jobRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

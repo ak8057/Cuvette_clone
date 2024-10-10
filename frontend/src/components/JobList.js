@@ -3,7 +3,6 @@ import axios from "axios";
 import JobDetails from "./JobDetails";
 import { TailSpin } from "react-loader-spinner";
 
-
 import {
   MapPin,
   Briefcase,
@@ -64,7 +63,6 @@ const JobList = () => {
     return offers[Math.floor(Math.random() * offers.length)];
   };
 
-
   const handleApply = () => {
     // Apply filter logic
     console.log("Filters Applied:", { officeType, experience, salary });
@@ -76,16 +74,7 @@ const JobList = () => {
     setSalary("");
   };
 
-
-  // Add filter logic to handle applying filters
-
-  const handleFilterChange = (newFilters) => {
-    setOfficeType(newFilters.officeType);
-
-    setExperience(newFilters.experience);
-
-    setSalary(newFilters.salary);
-  };
+  
 
   const filteredJobs = jobs.filter((job) => {
     return (
@@ -252,7 +241,8 @@ const JobList = () => {
                           <span className="font-semibold">Job Offer:</span>{" "}
                           {job.salaryRange?.min
                             ? `${job.salaryRange.min}LPA - ${job.salaryRange.max}`
-                            : "Not Available"}LPA
+                            : "Not Available"}
+                          LPA
                         </p>
                       </div>
                     </div>
