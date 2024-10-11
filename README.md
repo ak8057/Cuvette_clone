@@ -91,6 +91,14 @@ Recruiter Features:
 - view other user's profile
 - View Applications: Review job applications submitted by candidates.
 
+## Screenshots
+
+![Screenshot 2024-10-11 142357](https://github.com/user-attachments/assets/c97b31cf-ba69-4377-a127-94bec5cbe9b2)
+
+![Screenshot 2024-10-11 142414](https://github.com/user-attachments/assets/dc2359ae-c41a-43a2-af46-11b9ac5dd15d)
+
+![Screenshot 2024-10-11 142534](https://github.com/user-attachments/assets/b989cdd1-2e96-466d-a792-bde18b96de53)
+
 
 ## Contributing
 
