@@ -31,11 +31,13 @@ const JobList = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/jobs");
+        const res = await axios.get(
+          "https://cuvette-tia0.onrender.com/api/jobs"
+        );
         const modifiedJobs = await Promise.all(
           res.data.map(async (job) => {
             const imageRes = await axios.get(
-              "http://localhost:5000/api/unsplash",
+              "https://cuvette-tia0.onrender.com/api/unsplash",
               {
                 params: { query: job.title },
               }
@@ -130,7 +132,7 @@ const JobList = () => {
   };
 
   return (
-    <div className="w-[58rem] container mx-auto px-4 py-8 bg-gradient-to-br from-indigo-50 to-purple-50">
+    <div className="w-[52rem] container mx-auto px-4 py-8 bg-gradient-to-br from-indigo-50 to-purple-50">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
         {/* Search Input Container */}
         <div className="relative w-full md:w-3/4">
@@ -159,10 +161,10 @@ const JobList = () => {
         </div>
       </div>
 
-      <div className="flex gap-5">
-        <div>
+      <div className="flex gap-[52rem]">
+        <div >
           {loading ? (
-            <div className="flex ml-[25rem] justify-center items-center h-screen">
+            <div className="flex ml-[23rem] justify-center items-center h-screen">
               <TailSpin color="#4F46E5" height={80} width={80} />
             </div>
           ) : (
@@ -170,7 +172,7 @@ const JobList = () => {
               {filteredJobs.map((job, index) => (
                 <div
                   key={job._id}
-                  className={`bg-white shadow-xl rounded-2xl overflow-hidden transform transition duration-500 ease-in-out border border-gray-100 w-[56rem]`}
+                  className={`bg-white shadow-xl rounded-2xl overflow-hidden transform transition duration-500 ease-in-out border border-gray-100 w-[50rem]`}
                 >
                   <div className="p-6">
                     <div className="relative mb-6">
@@ -367,7 +369,7 @@ const JobList = () => {
 
         {/* rigthsidebar */}
 
-        <div className="fixed right-[1.80rem] top-[5.25rem] ">
+        <div className="mt-[-9rem]">
           <div className="bg-white shadow-xl min-w-96 min-h-96 rounded-2xl p-6 space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-800">Filters</h2>

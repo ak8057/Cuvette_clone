@@ -7,7 +7,7 @@ require("dotenv").config();
 const unsplashRoute = require("./routes/unsplash");
 
 
-
+//!middleware
 app.use(express.json());
 app.use(cors());
 
@@ -27,6 +27,7 @@ mongoose
     process.exit(1); // Exit process if connection fails
   });
 
+  
 //!apis
 app.use("/api/unsplash", unsplashRoute);
 app.use("/api/jobs",  jobRoutes);

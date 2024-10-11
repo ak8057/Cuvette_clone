@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <aside className="w-72 sticky top-[4.5rem] bg-white border-r border-gray-200 h-screen shadow-md">
+    <aside className="w-68 sticky top-[4.5rem] bg-white border-r border-gray-200 h-screen shadow-md">
       <nav className="mt-5 px-3">
         {/* Full-time Jobs */}
         <NavLink

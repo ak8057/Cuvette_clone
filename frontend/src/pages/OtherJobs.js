@@ -25,12 +25,12 @@ const OtherJobs = () => {
     const fetchJobs = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/jobs/other-jobs"
+          "https://cuvette-tia0.onrender.com/api/jobs/other-jobs"
         );
         const modifiedJobs = await Promise.all(
           res.data.map(async (job) => {
             const imageRes = await axios.get(
-              "http://localhost:5000/api/unsplash",
+              "https://cuvette-tia0.onrender.com/api/unsplash",
               {
                 params: { query: job.title },
               }
